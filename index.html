@@ -14,10 +14,12 @@
         <span class="h3" id="time1">0:05:00</span>
         <div id="board" style="width: 400px"></div>
         <span class="h3" id="time2">0:05:00</span>
+        <hr>
+        <div id="engineStatus">...</div>
       </div>
       <div class="col-sm-5 col-md-6">
         <h3>Moves:</h3>
-        <div id="pgn">sljnas dl sdal sdlajndals  sdn asd asdjn ad asdljna sd asdljnasdasdl  sadlnjasd  asdlanjs a sdna sd asdlnja sdl asd asjdn asd asdljnas d asd asdlnj</div>
+        <div id="pgn"></div>
         <hr>
         <form class="form-horizontal">
           <div class="form-group">
@@ -60,11 +62,27 @@
             </div>
           </div>
         </form>
-        <hr>
-        <h3>Engine Status:</h3>
-        <div id="engineStatus">...</div>
+        <h5>Compatibility</h5>
+        <small>This chess engine has been tested and found working in both Firefox 25 and Chrome 31. It runs about twice as fast in Firefox as in Chrome, so for best performance use Firefox. The engine has also been tested in Safari 6 where it does not run. It might run in a later version of this browser, though. It has not been tested in the Internet Explorer, but it should in theory run in IE versions >= 10.</small>
       </div>
     </div>
-    <script src="vscomp.js"></script>
+    <script src="enginegame.js"></script>
+    <script>
+      var game = engineGame({book: 'book.bin'});
+
+      function newGame() {
+        var baseTime = parseFloat($('#timeBase').val()) * 60;
+        var inc = parseFloat($('#timeInc').val());
+        var skill = parseInt($('#skillLevel').val());
+        game.reset();
+        game.setTime(baseTime, inc);
+        game.setSkillLevel(skill);
+        game.setPlayerColor($('#color-white').hasClass('active') ? 'white' : 'black');
+        game.setDisplayScore($('#showScore').is(':checked'));
+        game.start();
+      }
+
+      newGame();
+    </script>
   </body>
 </html>
