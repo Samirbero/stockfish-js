@@ -11,8 +11,8 @@ warm-up time.
 
 ### Download
 
-Download Stockfish DD compiled to javascript:
-[stockfish.js](https://github.com/exoticorn/stockfish-js/releases/download/sf_dd_js/stockfish.js)
+Download Stockfish 5 compiled to javascript:
+[stockfish.js](https://github.com/exoticorn/stockfish-js/releases/download/sf_5_js/stockfish.js)
 
 ### API
 
