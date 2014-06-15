@@ -177,13 +177,13 @@ void UCI::command(const string& cmd) {
       ss << Options["Hash"]    << " "
          << Options["Threads"] << " " << depth << " current " << token;
 
-      benchmark(pos, ss);
+      benchmark(currentPos, ss);
   }
   else if (token == "key")
       sync_cout << hex << uppercase << setfill('0')
-                << "position key: "   << setw(16) << pos.key()
-                << "\nmaterial key: " << setw(16) << pos.material_key()
-                << "\npawn key:     " << setw(16) << pos.pawn_key()
+                << "position key: "   << setw(16) << currentPos.key()
+                << "\nmaterial key: " << setw(16) << currentPos.material_key()
+                << "\npawn key:     " << setw(16) << currentPos.pawn_key()
                 << dec << nouppercase << setfill(' ') << sync_endl;
 
   else if (token == "uci")
@@ -193,16 +193,16 @@ void UCI::command(const string& cmd) {
 
   else if (token == "eval")
   {
-      Search::RootColor = pos.side_to_move(); // Ensure it is set
-      sync_cout << Eval::trace(pos) << sync_endl;
+      Search::RootColor = currentPos.side_to_move(); // Ensure it is set
+      sync_cout << Eval::trace(currentPos) << sync_endl;
   }
   else if (token == "ucinewgame") TT.clear();
-  else if (token == "go")         go(pos, is);
-  else if (token == "position")   position(pos, is);
+  else if (token == "go")         go(currentPos, is);
+  else if (token == "position")   position(currentPos, is);
   else if (token == "setoption")  setoption(is);
-  else if (token == "flip")       pos.flip();
-  else if (token == "bench")      benchmark(pos, is);
-  else if (token == "d")          sync_cout << pos.pretty() << sync_endl;
+  else if (token == "flip")       currentPos.flip();
+  else if (token == "bench")      benchmark(currentPos, is);
+  else if (token == "d")          sync_cout << currentPos.pretty() << sync_endl;
   else if (token == "isready")    sync_cout << "readyok" << sync_endl;
   else
       sync_cout << "Unknown command: " << cmd << sync_endl;

@@ -188,25 +188,12 @@ endif
 ifeq ($(COMP),clang)
 	comp=clang
 	CXX=clang++
-	profile_prepare = gcc-profile-prepare
-	profile_make = gcc-profile-make
-	profile_use = gcc-profile-use
-	profile_clean = gcc-profile-clean
+	CXXFLAGS += -ansi -pedantic -Wno-long-long -Wextra -Wshadow
 endif
 
 ifeq ($(COMP),emscripten)
 	comp=clang
 	CXX=em++
-	profile_prepare = gcc-profile-prepare
-	profile_make = gcc-profile-make
-	profile_use = gcc-profile-use
-	profile_clean = gcc-profile-clean
-endif
-
-### 3.2 General compiler settings
-CXXFLAGS = -Wall -Wcast-qual -fno-exceptions -fno-rtti $(EXTRACXXFLAGS)
-
-ifeq ($(comp),gcc)
 	CXXFLAGS += -ansi -pedantic -Wno-long-long -Wextra -Wshadow
 endif
 
@@ -222,21 +209,13 @@ else
 	profile_clean = gcc-profile-clean
 endif
 
-<<<<<<< HEAD
 ifeq ($(COMP),emscripten)
 	CXXFLAGS += -s TOTAL_MEMORY=67108864
 endif
 
-### 3.3 General linker settings
-LDFLAGS = $(EXTRALDFLAGS)
-
-ifeq ($(comp),mingw)
-	LDFLAGS += -static-libstdc++ -static-libgcc
-=======
 ifeq ($(UNAME),Darwin)
 	CXXFLAGS += -arch $(arch) -mmacosx-version-min=10.6
 	LDFLAGS += -arch $(arch) -mmacosx-version-min=10.6
->>>>>>> stockfish/sf_5_base
 endif
 
 ifeq ($(COMP),emscripten)
@@ -294,7 +273,6 @@ ifeq ($(optimize),yes)
 	endif
 
 	ifeq ($(comp),clang)
-		### -O4 requires a linker that supports LLVM's LTO
 		ifeq ($(COMP),emscripten)
 			CXXFLAGS += -O2
 			LDFLAGS += -O2
