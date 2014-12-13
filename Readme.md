@@ -14,12 +14,6 @@ warm-up time.
 Download Stockfish 5 compiled to javascript:
 [stockfish.js](https://github.com/exoticorn/stockfish-js/releases/download/sf_5_js/stockfish.js)
 
-### See also
-
-[stockfish.js](https://github.com/nmrugg/stockfish.js) is a fork of this fork which adds some
-interesting features. Most notably is the ability for the engine to receive commands between
-iterations, which allows aborting an infitite search (pondering/analysing).
-
 ### API
 
 Stockfish-js is designed to run in a web-worker, which can be created
